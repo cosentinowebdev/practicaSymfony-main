@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoriaRepository;
+use App\Repository\MarcadorRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CategoriaRepository::class)
+ * @ORM\Entity(repositoryClass=MarcadorRepository::class)
  */
-class Categoria
+class Marcador
 {
     /**
      * @ORM\Id
@@ -23,9 +23,14 @@ class Categoria
     private $nombre;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=255)
      */
-    private $color;
+    private $url;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Categoria::class)
+     */
+    private $categoria;
 
     public function getId(): ?int
     {
@@ -44,19 +49,27 @@ class Categoria
         return $this;
     }
 
-    public function getColor(): ?string
+    public function getUrl(): ?string
     {
-        return $this->color;
+        return $this->url;
     }
 
-    public function setColor(string $color): self
+    public function setUrl(string $url): self
     {
-        $this->color = $color;
+        $this->url = $url;
 
         return $this;
     }
-    public function __toString()
+
+    public function getCategoria(): ?Categoria
     {
-        return $this->nombre;
+        return $this->categoria;
+    }
+
+    public function setCategoria(?Categoria $categoria): self
+    {
+        $this->categoria = $categoria;
+
+        return $this;
     }
 }
