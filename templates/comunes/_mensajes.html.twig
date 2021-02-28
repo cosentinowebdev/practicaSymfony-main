@@ -1,0 +1,11 @@
+{% for tipo, mensajes in app.flashes %}
+    {% for mensaje in mensajes %}
+        <div class="alert alert-{{ tipo }} alert-dimissible fade show" role="alert">
+            <p>{{ mensaje }}</p>
+          <button type="close"
+          class="close"
+          data-dimiss="alert"
+          aria-label="close">
+        </div>
+    {% endfor %}
+{% endfor %}

@@ -1,15 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CategoriaController!{% endblock %}
-
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>hola {{ username }}! ✅</h1>
-
-</div>
+{% block contenedor_principal %}
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+    <h6 class="border-bottom border-gray pb-2 mb-0">
+      Mis marcadores
+    </h6>
+        {% include 'comunes/_mensajes.html.twig' %}
+      <table class="table">
+          <thead>
+              <tr>
+                  <th>
+                      Nombre
+                  </th>
+                  <th>
+                      Color
+                  </th>
+                  <th>
+                      Acciones
+                  </th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for categoria in categorias %}
+              <tr>
+                  <td>
+                      {{categoria.nombre}}
+                  </td>
+                  <td>
+                      {{categoria.color}}
+                  </td>
+                  <td>
+                      <div class="d-flex">                  
+                          <a href="{{ path('app_editar_categoria', {id: categoria.id})}}" class="btn btn-link mg-3">
+                              <span class="oi oi-pencil" title="Editar" aria-hidden="true"></span>
+                          </a>
+                          <a href="{{ path('app_eliminar_categoria', {id: categoria.id})}}" class="btn btn-link mg-3">
+                              <span class="oi oi-delete" title="Eliminar" aria-hidden="true"></span>
+                          </a>
+                      </div>
+                  </td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+        <a href="{{ path('app_nueva_categoria')}}" class="btn btn-link mg-3">
+            <span class="oi oi-pencil" title="Editar" aria-hidden="true"></span> Nueva Categoria
+        </a>
+  </div>
 {% endblock %}
+
