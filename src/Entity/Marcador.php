@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\MarcadorRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=MarcadorRepository::class)
@@ -19,16 +20,19 @@ class Marcador
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @assert\NotBlank
      */
     private $nombre;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @assert\NotBlank
      */
     private $url;
 
     /**
      * @ORM\ManyToOne(targetEntity=Categoria::class)
+     * @assert\NotBlank
      */
     private $categoria;
 
