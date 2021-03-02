@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/marcador')]
 class MarcadorController extends AbstractController
 {
-    #[Route('/', name: 'marcador_index', methods: ['GET'])]
+    #[Route('/', name: 'app_marcador_index', methods: ['GET'])]
     public function index(MarcadorRepository $marcadorRepository): Response
     {
         return $this->render('marcador/index.html.twig', [
@@ -21,7 +21,7 @@ class MarcadorController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'marcador_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_marcador_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
         $marcador = new Marcador();
@@ -33,7 +33,7 @@ class MarcadorController extends AbstractController
             $entityManager->persist($marcador);
             $entityManager->flush();
 
-            return $this->redirectToRoute('marcador_index');
+            return $this->redirectToRoute('app_marcador_index');
         }
 
         return $this->render('marcador/new.html.twig', [
@@ -42,7 +42,7 @@ class MarcadorController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'marcador_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_marcador_show', methods: ['GET'])]
     public function show(Marcador $marcador): Response
     {
         return $this->render('marcador/show.html.twig', [
@@ -50,7 +50,7 @@ class MarcadorController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'marcador_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_marcador_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Marcador $marcador): Response
     {
         $form = $this->createForm(MarcadorType::class, $marcador);
@@ -59,7 +59,7 @@ class MarcadorController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('marcador_index');
+            return $this->redirectToRoute('app_marcador_index');
         }
 
         return $this->render('marcador/edit.html.twig', [
@@ -68,7 +68,7 @@ class MarcadorController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'marcador_delete', methods: ['DELETE'])]
+    #[Route('/{id}', name: 'app_marcador_delete', methods: ['DELETE'])]
     public function delete(Request $request, Marcador $marcador): Response
     {
         if ($this->isCsrfTokenValid('delete'.$marcador->getId(), $request->request->get('_token'))) {
@@ -77,6 +77,6 @@ class MarcadorController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('marcador_index');
+        return $this->redirectToRoute('app_marcador_index');
     }
 }
