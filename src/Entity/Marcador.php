@@ -27,6 +27,9 @@ class Marcador
     /**
      * @ORM\Column(type="string", length=255)
      * @assert\NotBlank
+     * @assert\Url(
+     *    message = "La url '{{ value }}' no es valida"
+     * )
      */
     private $url;
 
@@ -76,4 +79,6 @@ class Marcador
 
         return $this;
     }
+
 }
+ 
