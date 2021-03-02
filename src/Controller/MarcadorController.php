@@ -33,7 +33,9 @@ class MarcadorController extends AbstractController
             $entityManager->persist($marcador);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_marcador_index');
+            $this->addFlash('success','Marcador creado correctamente');
+
+            return $this->redirectToRoute('app_index');
         }
 
         return $this->render('marcador/new.html.twig', [
@@ -59,7 +61,9 @@ class MarcadorController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('app_marcador_index');
+            $this->addFlash('success','Marcador editado correctamente');
+
+            return $this->redirectToRoute('app_index');
         }
 
         return $this->render('marcador/edit.html.twig', [
@@ -75,8 +79,9 @@ class MarcadorController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($marcador);
             $entityManager->flush();
+            $this->addFlash('success','Marcador eliminada correctamente');
         }
 
-        return $this->redirectToRoute('app_marcador_index');
+        return $this->redirectToRoute('app_index');
     }
 }
