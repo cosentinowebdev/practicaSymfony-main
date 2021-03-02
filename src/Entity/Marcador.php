@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Validator as AppAssert;
 use App\Repository\MarcadorRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -27,9 +28,7 @@ class Marcador
     /**
      * @ORM\Column(type="string", length=255)
      * @assert\NotBlank
-     * @assert\Url(
-     *    message = "La url '{{ value }}' no es valida"
-     * )
+     * @AppAssert\UrlAccesible 
      */
     private $url;
 
