@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass=MarcadorRepository::class)
  */
 class Marcador
@@ -38,6 +39,20 @@ class Marcador
      */
     private $categoria;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $creado;
+ 
+    /**
+     * @ORM\PrePersist
+     */
+    public function setValorDefecto() : void
+    {   
+        
+        $this->creado = new \DateTime();    
+
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +90,18 @@ class Marcador
     public function setCategoria(?Categoria $categoria): self
     {
         $this->categoria = $categoria;
+
+        return $this;
+    }
+
+    public function getCreado(): ?\DateTimeInterface
+    {
+        return $this->creado;
+    }
+
+    public function setCreado(\DateTimeInterface $creado): self
+    {
+        $this->creado = $creado;
 
         return $this;
     }
