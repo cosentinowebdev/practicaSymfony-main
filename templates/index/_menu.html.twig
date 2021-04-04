@@ -11,6 +11,7 @@
 
   <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
+      <li class="nav-item"><a class="nav-link {{ 'app_favoritos' == app_ruta  ? 'active' }}" href="{{ path('app_favoritos') }}">Favoritos</a></li>
       <li class="nav-item"><a class="nav-link {{ 'app_index' == app_ruta and nombre_categoria is empty ? 'active' }}" href="{{ path('app_index') }}">Todas</a></li>
       {% for categoria in categoria_repository.findAll %}
         <li class="nav-item"><a class="nav-link {{ 'app_index' == app_ruta and categoria.nombre == nombre_categoria ? 'active' }}" href="{{ path('app_index', {categoria: categoria.nombre}) }}">{{categoria.nombre}}</a></li>
